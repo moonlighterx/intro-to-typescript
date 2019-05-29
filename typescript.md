@@ -131,4 +131,67 @@ myTuple[1].substr(0,1)
 ```
 The `substr` method is only available for values declared of type `string`, not of type `number`.
 
-## Diving Into Functions
+## `any` and `void`
+
+Often with JavaScript, you may work with an older library, not compatible with your shiny new ES6 and TypeScript code.  It's possible you may not know the `type` of values being retrieved from said older library.  In these cases, you can use the type `any` to store the data.
+
+```js
+let val: any = $(".result").text()
+//get the result from this DOM element, is it a number? a string?
+```
+
+With `void`, this is useful whenever we come across a function that does not have a return value.  In regular JavaScript, when a function does not return a value, behind the scenes the compiler returns `undefined` automatically.   
+
+This is why when you use something like `console.log` in your development tools, you see `undefined` appear after logging something.  
+
+The `void` keyword is used mainly in other languages like C# and C to indicate that a function does not have a return value, so for using `void` in TypeScript we can be more helpful to others reading our code to emphasize that our function does not return a value.
+
+```js
+let log = (message: string): void => { console.log(message); }
+```
+Here we create a new function `log` that takes a parameter of `message`, which is of type `string`.  After the parentheses, we see a `:` mark, which indicates what return `type` this function should give us back, aka `void` here (we do not expect a return type other than `undefined`).  
+
+The `=>` and `{}` looks similar to what we already know about fat arrow functions, basically we place our own code inside the brackets.  In this case, we drop in the `console.log` function and pass it our `message`.  Hey it's easier to write `log` than `console.log` right?
+
+
+## Enums
+
+## Functions
+
+Functions can be written for TypeScript as well.  Let's look at a few examples.
+
+```js
+const getEvenNums = (num: number): number[] => {
+  let arr = [];
+
+  if (num < 2) return [];
+
+  for (let i = 2; i <= num; i += 1) {
+    if (i % 2 === 0) {
+      arr.push(i);
+    }
+  }
+  return arr;
+};
+```
+
+Here we have an example from a member of our [Discord channel](https://discordapp.com/invite/h2568CQ) via #practice, who wrote a function in TypeScript to get all the even numbers between 2 and the `num` passed to the `getEvenNums` function.   
+
+Breaking it down we can see that this function `getEvenNums` takes a single parameter `num` which is of type `number`.  After the `:` we indicate we want a return type of `number[]`, which means a number type array.   So we want to return from this function an array of number types.
+
+The rest of the function body goes inside the curly brackets, feel free to try compiling this code to see what it eventually looks like.
+
+
+## Webpack Integration
+
+If you're tired of using the command line to type out `tsc` each time with your filename, you can wire up your project folder with [Webpack](https://webpack.js.org/) to automatically compile your TypeScript code each time you save.  Let's do a quick example here.
+
+
+
+
+
+## Wrapping it up
+
+Hope this mini guide on TypeScript has been useful to you.  If you are still interested in learning more, you can check out the official handbook on Microsoft's TypeScript website, which gives a lot more detailed examples.  
+
+You can also check out a talk by James Earle of Microsoft who gave a talk at our group on the subject as well via this video.  Be sure to subscribe to our YouTube channel for more videos from our group!  (We record all our meetups).   Thanks for reading!
