@@ -387,7 +387,7 @@ In your package.json look for the `"scripts"` region and update it to look like 
 ```js
 "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1",
-  "webpack": "node_modules/.bin/webpack",
+  "webpack": "node_modules/.bin/webpack"
 },
 ```
 Great, now let's write some TypeScript. Go to your `src` folder, then open the `index.ts` file and plug in some TypeScript code, e.g. the following:
@@ -398,7 +398,7 @@ let message: string = `Hello World`
 document.getElementById('result').innerText = message
 ```
 
-From your command line, run webpack.  You should see webpack start to build and finish.  If there are any errors with your TypeScript, it will tell you in the console so you can fix.  If all is successful, you can open your `index.html` file with your favorite browser to see the result in your `<p id="result"></p>` tag.  
+From your command line, run `webpack`.  You should see webpack start to build and finish.  If there are any errors with your TypeScript, it will tell you in the console so you can fix.  If all is successful, you can open your `index.html` file with your favorite browser to see the result in your `<p id="result"></p>` tag.  
 
 This `index.html` has properly loaded the `bundle.js` file from your `dist` folder, which you can check to see your transpiled TypeScript to plain JavaScript code.
 
