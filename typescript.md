@@ -75,7 +75,34 @@ tsc myTypeScript.ts
 ```
 If all goes well, you can look at your project folder where your `myTypeScript.ts` file is and see a new file called `myTypeScript.js`.  Congrats! You just compiled your TypeScript code to regular JavaScript code!
 
+```js
+var myName = "Vijay";
+var myAge = 36;
+var isEmployed = true;
+```
+You should see this as your output
+
 ### Breaking it Down
 
+Okay, that was cool, but now I'm sure you are wondering what all the `:` stuff means.  Let's break it down.  Remember, JavaScript doesn't have type declarations -- at least explicitly like other languages do.
+
+With TypeScript, we can define what `type` our variable should be with the syntax as follows.
+
 ```js
+let myName: string = "Vijay"
+//this declares a variable of type String in JavaScript
+
+let myAge:number = 36
+//this declares a variable of type Number
+
+let isEmployed:boolean = true;
+//declares a boolean (true or false variable)
 ```
+
+So basically, we declare the `type` of the variable after the variable name has been declared, but before the value is set with the `=` assignment operator.
+
+*Clear so far?*
+
+## Let's Talk About functions
+
+Functions 
