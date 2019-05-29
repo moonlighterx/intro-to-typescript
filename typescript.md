@@ -65,7 +65,7 @@ After you download TypeScript, open up your favorite editor and let's type in th
 ```js
 let myAge: number = 36
 let isEmployed: boolean = true
-let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }"
+let myName: string = `Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }`
 ```
 
 Save this code in your editor as a TypeScript file, with the extension `.ts`, (so something like myTypeScript.ts).  After that, run the following command in your command line.
@@ -287,22 +287,130 @@ You can see why using an `interface` is so much more helpful for flagging errors
 
 ## Webpack Integration
 
-If you're tired of using the command line to type out `tsc` each time with your filename, you can wire up your project folder with [Webpack](https://webpack.js.org/) to automatically compile your TypeScript code each time you save.  Let's do a quick example here.
+If you're tired of using the command line to type out `tsc` each time with your filename, you can wire up your project folder with [Webpack](https://webpack.js.org/) to automatically watch and compile your TypeScript code each time you save.  Let's do a quick example here.
 
 ### Install webpack
 
-Using the command line, go ahead and run the following command:
+Using the command line, go ahead and run the following commands:
 
 ```console
-npm install -g webpack
+mkdir ts-test
+cd ts-test
+mkdir src
+mkdir dist
+touch src/index.ts
+touch index.html
+npm init -y
+```
+We've created our project folder and run the command `npm init -y` which just basically initializes our project folder with an `index.html`, the folders `src` and `dist` (we'll talk about in a minute), an `index.ts` file as an entry point for our project folder's TypeScript code in `src`, and a bare-bones `package.json` file for use with Node.js.
+
+Next let's add a few dependencies to our project, namely the `typescript` module and the `awesome-typescript-loader` loader (to transpile our Typescript code) for Webpack.  Finally we need `webpack` to build our project's `src` folder files and drop them into the `dist` folder as a `bundle.js` file our `index.html` can resource.
+
+Run the following:
+
+```console
+npm i typescript awesome-typescript-loader webpack --save-dev
 ```
 
-This will allow you to use webpack on any project initialized with Node.
+While that downloads, let's update our `index.html` file to look like:
 
-Next we need to create a project folder.  Let's make one now.
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p id="result">Result goes here</p>
+    <script type="text/javascript" src="dist/bundle.js"></script>
+  </body>
+</html>
+```
 
+Create two config files, one for TypeScript and one for Webpack.  In the console type:
 
+```console
+touch webpack.config.js
+touch tsconfig.json
+```
 
+Now let's modify each file.  Starting with `webpack.config.js` update it to look like the following:
+
+```js
+module.exports = {
+  entry: "./src/index.ts",
+  output: {
+    filename: "bundle.js",
+    path: __dirname + "/dist"
+  },
+  resolve: {
+      extensions: ['.ts', '.js']
+  },
+  watch:true,
+  module: {
+    rules: [
+      {
+        test: /\.ts?$/,
+        loader: 'awesome-typescript-loader'
+      }
+    ]
+  }
+};
+```
+Breaking it down, we're saying to webpack that we want our `entry` to be our `src/index.ts` file (our main TypeScript file).  The build from webpack should go to our `dist` folder via `output: { filename: 'bundle.js', 'path:__dirname + "/dist"'}`.
+
+We want webpack to `resolve` file extensions .ts and .js in our project, and then add a `watch` parameter (set to `true`) so webpack will watch our code as we change and recompile (hence saving you from typing `tsc`).
+
+Finally we config the `module` area with `rules` that we want to use the `awesome-typescript-loader` to transform any `.ts` files in our project.
+
+Next, we need to update our `tsconfig.json` file.  Let's do that.  Here, I just modified a configuration from the [TypeScript handbook](https://www.typescriptlang.org/docs/handbook) but we can break it down.
+
+```js
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "module": "commonjs",
+        "target": "es6",
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
+```
+With a `tsconfig.json` file, we are essentially telling webpack and our compiler that we are using TypeScript, and where essentially we want our files to be sent to in the `compilerOptions` property.   
+
+We have some standard options including `"ourDir"`, which is our `dist` folder, `module` development style we want to use, aka `commonjs`, and `target:"es6"` so our compiler can transpile the latest ES6 features. For more info on additional properties visit <https://www.typescriptlang.org/docs/handbook/compiler-options.html>
+
+One more thing before we can get to the fun part.
+
+Let's update our `package.json` so we can run webpack from the console using just the `webpack` command.
+
+In your package.json look for the `"scripts"` region and update it to look like so:
+
+```js
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "webpack": "node_modules/.bin/webpack",
+},
+```
+Great, now let's write some TypeScript. Go to your `src` folder, then open the `index.ts` file and plug in some TypeScript code, e.g. the following:
+
+```js
+let message: string = `Hello World`
+
+document.getElementById('result').innerText = message
+```
+
+From your command line, run webpack.  You should see webpack start to build and finish.  If there are any errors with your TypeScript, it will tell you in the console so you can fix.  If all is successful, you can open your `index.html` file with your favorite browser to see the result in your `<p id="result"></p>` tag.  
+
+This `index.html` has properly loaded the `bundle.js` file from your `dist` folder, which you can check to see your transpiled TypeScript to plain JavaScript code.
+
+From here, you can keep playing with your TypeScript code and adding more complexity and you should be able to refresh this page with the changes without having to type more commands in your command line.  To finish using webpack, simply hit `Ctrl-C` on your keyboard twice to end the program.  
+
+## Summary on Webpack
+
+Obviously with webpack you can do even more than what was mentioned here including creating a `webpack-dev-server` with `hot-module-reloading` (to create a simple server that loads your page and reloads it on each save), but that discussion is outside of the scope of TypeScript.  (Maybe at a later time, I'll write up an example).  For now, let's keep it simple as we've already covered a lot of material.
 
 ## Wrapping it up
 
