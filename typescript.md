@@ -63,9 +63,9 @@ After you download TypeScript, open up your favorite editor and let's type in th
 > Note for all my examples, I will be using the latest in JavaScript syntax, aka EcmaScript 6 (ES6).  Not familiar with ES6?  Get my book: [Survive Programming: A RoadMap to EcmaScript 6 - The Latest Version of JavaScript](https://www.amazon.com/Survive-Programming-RoadMap-Version-JavaScript-ebook/dp/B07RXGGQJ5/ref=sr_1_3?keywords=learn+es6&qid=1559086204&s=gateway&sr=8-3)
 
 ```js
-let myName: string = "Vijay"
 let myAge: number = 36
 let isEmployed: boolean = true
+let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }";
 ```
 
 Save this code in your editor as a TypeScript file, with the extension `.ts`, (so something like myTypeScript.ts).  After that, run the following command in your command line.
@@ -76,11 +76,11 @@ tsc myTypeScript.ts
 If all goes well, you can look at your project folder where your `myTypeScript.ts` file is and see a new file called `myTypeScript.js`.  Congrats! You just compiled your TypeScript code to regular JavaScript code!
 
 ```js
-var myName = "Vijay";
 var myAge = 36;
 var isEmployed = true;
+var myName = "Vijay is " + myAge + " years old and " + (isEmployed ? 'is working' : 'is currently broke');
 ```
-You should see this as your output
+You should see this as your output.
 
 ### Breaking it Down
 
@@ -89,20 +89,16 @@ Okay, that was cool, but now I'm sure you are wondering what all the `:` stuff m
 With TypeScript, we can define what `type` our variable should be with the syntax as follows.
 
 ```js
-let myName: string = "Vijay"
-//this declares a variable of type String in JavaScript
-
 let myAge:number = 36
-//this declares a variable of type Number
+//this declares a variable of type Number in JavaScript
 
 let isEmployed:boolean = true;
-//declares a boolean (true or false variable)
+//declares a boolean (true or false variable) in JavaScript
+
+let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }";
+//this declares a variable of type String in JavaScript
 ```
 
-So basically, we declare the `type` of the variable after the variable name has been declared, but before the value is set with the `=` assignment operator.
+So basically, we declare the `type` of the variable after the variable name has been declared, but before the value is set with the `=` assignment operator.  Using TypeScript is a bit more verbose, but as you can see from the example we did, our declarations do look more precise.  If you're good so far, let's move on.
 
-*Clear so far?*
-
-## Let's Talk About functions
-
-Functions 
+## Arrays & Tuples
