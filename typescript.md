@@ -8,14 +8,14 @@ So what is TypeScript you might ask?  It's another thing all the cool kids are u
 
 All jokes aside, TypeScript is a new way to write JavaScript, and one that is a bit more precise when it comes to declaring variables, functions, classes and more.   
 
-If you've ever used another language like `C#` or `Java`, you know that those languages are a bit more strict about variable declaration.  
+If you've ever used another language like `C#` or `Java`, you know that those languages are a bit more strict about variable declaration.   This strict declaration is sometimes known as *static typing*.  JavaScript, by default is a *loosely typed* language.
 
 While this is okay in JavaScript:
 ```javascript
 str = "Hello World";
 console.log(str);
 ```
-It's definitely not in C#:
+It's definitely not in C#, we aren't being strict enough about the type:
 ```csharp
 str = "Hello World";
 Console.WriteLine(str);
@@ -29,7 +29,7 @@ A **type** helps the program know what kind of space in memory to allocate for t
 
 However, in other programming languages, this is not the case -- we need to be specific otherwise we can run into errors later with our program.  
 
-## It's All About Portability
+## It's All About Portability And Minimizing Errors
 
 If you're a company like Microsoft, you probably write a lot of C#.  (Windows is a heavy C# language).  Hence, being able to write code in C# and port to JavaScript fast is a dream come true.   Yet, JavaScript doesn't work like C#.  It's got its own rules and quirks developers often have to figure out.  (Functions create objects anyone?)  This causes headaches for many of the developers, and as a result -- TypeScript was created to alleviate some of their pain.
 
@@ -131,34 +131,9 @@ myTuple[1].substr(0,1)
 ```
 The `substr` method is only available for values declared of type `string`, not of type `number`.
 
-## `any` and `void`
-
-Often with JavaScript, you may work with an older library, not compatible with your shiny new ES6 and TypeScript code.  It's possible you may not know the `type` of values being retrieved from said older library.  In these cases, you can use the type `any` to store the data.
-
-```js
-let val: any = $(".result").text()
-//get the result from this DOM element, is it a number? a string?
-```
-
-With `void`, this is useful whenever we come across a function that does not have a return value.  In regular JavaScript, when a function does not return a value, behind the scenes the compiler returns `undefined` automatically.   
-
-This is why when you use something like `console.log` in your development tools, you see `undefined` appear after logging something.  
-
-The `void` keyword is used mainly in other languages like C# and C to indicate that a function does not have a return value, so for using `void` in TypeScript we can be more helpful to others reading our code to emphasize that our function does not return a value.
-
-```js
-let log = (message: string): void => { console.log(message); }
-```
-Here we create a new function `log` that takes a parameter of `message`, which is of type `string`.  After the parentheses, we see a `:` mark, which indicates what return `type` this function should give us back, aka `void` here (we do not expect a return type other than `undefined`).  
-
-The `=>` and `{}` looks similar to what we already know about fat arrow functions, basically we place our own code inside the brackets.  In this case, we drop in the `console.log` function and pass it our `message`.  Hey it's easier to write `log` than `console.log` right?
-
-
-## Enums
-
 ## Functions
 
-Functions can be written for TypeScript as well.  Let's look at a few examples.
+Functions can be written for TypeScript as well.  Let's look at an example.
 
 ```js
 const getEvenNums = (num: number): number[] => {
@@ -181,18 +156,157 @@ Breaking it down we can see that this function `getEvenNums` takes a single para
 
 The rest of the function body goes inside the curly brackets, feel free to try compiling this code to see what it eventually looks like.
 
+## `any` and `void`
+
+Often with JavaScript, you may work with an older library, not compatible with your shiny new ES6 and TypeScript code.  It's possible you may not know the `type` of values being retrieved from said older library.  In these cases, you can use the type `any` to store the data.
+
+```js
+let val: any = $(".result").text()
+//get the result from this DOM element, is it a number? a string?
+```
+
+With `void`, this is useful whenever we come across a function that does not have a return value.  In regular JavaScript, when a function does not return a value, behind the scenes the compiler returns `undefined` automatically.   
+
+This is why when you use something like `console.log` in your development tools, you see `undefined` appear after logging something.  
+
+The `void` keyword is used mainly in other languages like C# and C to indicate that a function does not have a return value, so for using `void` in TypeScript we can be more helpful to others reading our code to emphasize that our function does not return a value.
+
+```js
+let log = (message: string): void => { console.log(message); }
+```
+Here we create a new function `log` that takes a parameter of `message`, which is of type `string`.  After the parentheses, we see a `:` mark, which indicates what return `type` this function should give us back, aka `void` here (we do not expect a return type other than `undefined`).  
+
+The `=>` and `{}` looks similar to what we already know about fat arrow functions, basically we place our own code inside the brackets.  In this case, we drop in the `console.log` function and pass it our `message`.  Hey it's easier to write `log` than `console.log` right?
+
+## Enums
+
+When I first heard the word `enum`, I was immediately turned off.  "It sounds so ugly, of course it must be complicated to learn", I thought.
+
+The good news is it's not complicated at all, just an ugly name.  If you know how to use an `object` or an `array` in JavaScript, you can pretty much get the gist of an `enum` too.  
+
+An `enum` is just a way to declare a group of datatypes together into something more meaningful.  For example, we could declare a JavaScript object that stores the days of the week like so:
+
+```js
+let daysOfWeek = {
+  "Mon",
+  "Tues",
+  "Wed",
+  "Thurs",
+  "Fri",
+  "Sat",
+  "Sun"
+}
+console.log(daysOfWeek[0]) //Mon
+```
+
+An `enum` works similarly.
+
+```js
+enum DaysOfWeek {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday
+}
+
+let day: string = DaysOfWeek[0]
+console.log(day)
+//Monday
+```
+The main differences between a standard JavaScript `object` and an `enum` are:
+
+- enums don't hold values like strings and numbers
+- enums hold basically *aliases* for index values starting from `0`
+ - `Monday`, `Tuesday` and so on are placeholder aliases for indicies `0` and `1`.
+- We can change the index starting order in an `enum`, but not an `object`. We can also change individual indicies if we wish in the `enum`.
+
+Here's an example illustrating that last point.
+
+```js
+enum DaysOfWeek {
+  Monday = 1,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday = 10,
+  Saturday,
+  Sunday
+}
+let day: string = DaysOfWeek[10]
+console.log(day)
+//Friday
+```
+As you can see enums are a bit more meaningful and customizable than regular JavaScript objects, and help other developers know exactly what to expect when they have a function take in an `enum` parameter versus an `object` parameter.
+
+## Interfaces
+
+If you've got the hang of enums, you pretty much can get interfaces too.
+
+An interface is a way to describe each property's type on an `object`.  So for example, we could write in plain JS:
+
+```js
+let car = {
+  name: "Toyota",
+  model: "Prius",
+  wheels: 4,
+  engine: "electric",
+  odometer: 1000
+}
+```
+While this object is okay, the types on each property like `name`, `model`, `odometer` aren't defined. If we use this object with a function and don't pass in all the properties, we can get some garbage values instead which may throw off our program. We can do better to prevent garbage data by using TypeScript to define an `interface` for our object.
+
+```js
+interface Car {
+  name: string,
+  model: string,
+  wheels: number,
+  engine: string,
+  odometer: number
+}
+
+let myCarDataInfo = (car: Car):string => {
+  `You drive a ${car.name} ${car.model}.  It has ${car.wheels} wheels, an ${car.engine} engine and has a mileage of ${car.odometer}.`
+}
+
+let car = {
+  name: "Toyota",
+  model: "Prius",
+  wheels: 4,
+  odometer: 1000
+}
+
+console.log(myCarDataInfo(car))
+/* Property 'engine' is missing in type '{ name: string; model: string; wheels: number; odometer: number; }' but required in type 'Car'. */
+```
+Did you catch the error?  We are missing the engine property in our `car` object, so TypeScript's compiler let us know that this object was no good, we need to fix the error before we can use it with our function.  
+
+You can see why using an `interface` is so much more helpful for flagging errors we may not notice on first pass!
 
 ## Webpack Integration
 
 If you're tired of using the command line to type out `tsc` each time with your filename, you can wire up your project folder with [Webpack](https://webpack.js.org/) to automatically compile your TypeScript code each time you save.  Let's do a quick example here.
 
+### Install webpack
+
+Using the command line, go ahead and run the following command:
+
+```console
+npm install -g webpack
+```
+
+This will allow you to use webpack on any project initialized with Node.
+
+Next we need to create a project folder.  Let's make one now.
 
 
 
 
 ## Wrapping it up
 
-Hope this mini guide on TypeScript has been useful to you.  If you are still interested in learning more, you can check out the [official handbook](https://www.typescriptlang.org/docs/handbook) on Microsoft's TypeScript website, which gives a lot more detailed examples.  
+Hope this mini guide on TypeScript has been useful to you.  Perhaps this guide motivated you to learn C# as well.  (It is a popular language especially for game development).  If you are still interested in learning more on TypeScript, you can check out the [official handbook](https://www.typescriptlang.org/docs/handbook) on Microsoft's TypeScript website, which gives a lot more detailed examples.  You can also learn all about C# via [Microsoft's C# Programming Guide](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/).
 
 You can also check out a talk by [James Earle of Microsoft](https://www.youtube.com/watch?v=HkR474Y3tVg) who gave a talk at our group on the subject as well via this video.  
 
