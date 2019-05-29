@@ -92,7 +92,8 @@ let myAge:number = 36
 let isEmployed:boolean = true;
 //declares a boolean (true or false variable) in JavaScript
 
-let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }";
+let myName: string = `Vijay is ${myAge} years old and
+${ isEmployed : 'is working' : 'is currently broke' }`;
 //this declares a variable of type String in JavaScript
 ```
 
@@ -264,7 +265,9 @@ interface Car {
 }
 
 let myCarDataInfo = (car: Car):string => {
-  `You drive a ${car.name} ${car.model}.  It has ${car.wheels} wheels, an ${car.engine} engine and has a mileage of ${car.odometer}.`
+  `You drive a ${car.name} ${car.model}.
+   It has ${car.wheels} wheels, an ${car.engine} engine
+   and has a mileage of ${car.odometer}.`
 }
 
 let car = {
@@ -275,7 +278,10 @@ let car = {
 }
 
 console.log(myCarDataInfo(car))
-/* Property 'engine' is missing in type '{ name: string; model: string; wheels: number; odometer: number; }' but required in type 'Car'. */
+/* Property 'engine' is missing in type
+'{ name: string; model: string;
+wheels: number; odometer: number; }'
+but required in type 'Car'. */
 ```
 Did you catch the error?  We are missing the engine property in our `car` object, so TypeScript's compiler let us know that this object was no good, we need to fix the error before we can use it with our function.  
 
