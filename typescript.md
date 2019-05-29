@@ -2,6 +2,8 @@
 title: Intro to TypeScript
 ...
 
+# Intro to TypeScript
+
 So what is TypeScript you might ask?  It's another thing all the cool kids are using these days, so you'd better wise up and learn this thing too!
 
 All jokes aside, TypeScript is a new way to write JavaScript, and one that is a bit more precise when it comes to declaring variables, functions, classes and more.   
@@ -61,13 +63,9 @@ After you download TypeScript, open up your favorite editor and let's type in th
 > Note for all my examples, I will be using the latest in JavaScript syntax, aka EcmaScript 6 (ES6).  Not familiar with ES6?  Get my book: [Survive Programming: A RoadMap to EcmaScript 6 - The Latest Version of JavaScript](https://www.amazon.com/Survive-Programming-RoadMap-Version-JavaScript-ebook/dp/B07RXGGQJ5/ref=sr_1_3?keywords=learn+es6&qid=1559086204&s=gateway&sr=8-3)
 
 ```js
-let hello = (student: string) => {
-  return `Hello ${student}`
-}
-
-let student1 = "Vijay Menon"
-
-console.log(hello(student1))
+let myName: string = "Vijay"
+let myAge: number = 36
+let isEmployed: boolean = true
 ```
 
 Save this code in your editor as a TypeScript file, with the extension `.ts`, (so something like myTypeScript.ts).  After that, run the following command in your command line.
@@ -77,4 +75,7 @@ tsc myTypeScript.ts
 ```
 If all goes well, you can look at your project folder where your `myTypeScript.ts` file is and see a new file called `myTypeScript.js`.  Congrats! You just compiled your TypeScript code to regular JavaScript code!
 
-### Great, But What Does This Strange Syntax Even Mean?
+### Breaking it Down
+
+```js
+```
