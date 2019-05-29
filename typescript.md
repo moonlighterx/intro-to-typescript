@@ -65,7 +65,7 @@ After you download TypeScript, open up your favorite editor and let's type in th
 ```js
 let myAge: number = 36
 let isEmployed: boolean = true
-let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }";
+let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }"
 ```
 
 Save this code in your editor as a TypeScript file, with the extension `.ts`, (so something like myTypeScript.ts).  After that, run the following command in your command line.
@@ -91,6 +91,7 @@ With TypeScript, we can define what `type` our variable should be with the synta
 ```js
 let myAge:number = 36
 //this declares a variable of type Number in JavaScript
+//in JS, all Number types are float types behind the scenes
 
 let isEmployed:boolean = true;
 //declares a boolean (true or false variable) in JavaScript
@@ -102,3 +103,32 @@ let myName: string = "Vijay is ${myAge} years old and ${ isEmployed : 'is workin
 So basically, we declare the `type` of the variable after the variable name has been declared, but before the value is set with the `=` assignment operator.  Using TypeScript is a bit more verbose, but as you can see from the example we did, our declarations do look more precise.  If you're good so far, let's move on.
 
 ## Arrays & Tuples
+
+We can define our variables as Arrays and Tuples as well.  You may be familiar with an Array, denoted by the `[]` syntax, but Tuples might be new to you unless you've dabbled in a language like Python.  A Tuple is like an Array, but cannot have its values changed after they have been set.
+
+```js
+let myArr:number[] = [1,2,3,4,5]
+let myArr:Array<String> = ['yolo', 'whazzup', 'rad', 'lol']
+```
+In both these cases above, we are defining a variable of type Array (either with `[]` syntax or `Array` syntax, specifying the `type` in each case -- `number`, `string`)
+
+```js
+let myTuple:[string, number] = ["hello", 2]
+```
+With a tuple, we must use the same types as the order of definition, meaning we cannot define `myTuple` as such:
+
+```js
+myTuple = [10,20];
+//Type 'number' is not assignable to type 'string'
+```
+
+You also cannot use `string` methods on `number` types and vice versa for values in tuples.
+
+```js
+myTuple[0].substr(0,1)
+myTuple[1].substr(0,1)
+//Property 'substr' does not exist on type 'number'
+```
+The `substr` method is only available for values declared of type `string`, not of type `number`.
+
+## Diving Into Functions
