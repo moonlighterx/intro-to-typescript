@@ -61,7 +61,8 @@ After you download TypeScript, open up your favorite editor and let's type in th
 ```js
 let myAge: number = 36
 let isEmployed: boolean = true
-let myName: string = `Vijay is ${myAge} years old and ${ isEmployed : 'is working' : 'is currently broke' }`
+let myName: string = `Vijay is ${myAge} years old
+and ${ isEmployed : 'is working' : 'is currently broke' }`
 ```
 
 Save this code in your editor as a TypeScript file, with the extension `.ts`, (so something like myTypeScript.ts).  After that, run the following command in your command line.
@@ -74,7 +75,8 @@ If all goes well, you can look at your project folder where your `myTypeScript.t
 ```js
 var myAge = 36;
 var isEmployed = true;
-var myName = "Vijay is " + myAge + " years old and " + (isEmployed ? 'is working' : 'is currently broke');
+var myName = "Vijay is " + myAge + " years old and "
++ (isEmployed ? 'is working' : 'is currently broke');
 ```
 You should see this as your output.
 
