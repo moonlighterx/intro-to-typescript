@@ -1,7 +1,3 @@
----
-title: Intro to TypeScript
-...
-
 # Intro to TypeScript
 
 So what is TypeScript you might ask?  It's another thing all the cool kids are using these days, so you'd better wise up and learn this thing too!
