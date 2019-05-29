@@ -192,10 +192,10 @@ If you're tired of using the command line to type out `tsc` each time with your 
 
 ## Wrapping it up
 
-Hope this mini guide on TypeScript has been useful to you.  If you are still interested in learning more, you can check out the official handbook on Microsoft's TypeScript website, which gives a lot more detailed examples.  
+Hope this mini guide on TypeScript has been useful to you.  If you are still interested in learning more, you can check out the [official handbook](https://www.typescriptlang.org/docs/handbook) on Microsoft's TypeScript website, which gives a lot more detailed examples.  
 
-You can also check out a talk by James Earle of Microsoft who gave a talk at our group on the subject as well via this video.  
+You can also check out a talk by [James Earle of Microsoft](https://www.youtube.com/watch?v=HkR474Y3tVg) who gave a talk at our group on the subject as well via this video.  
 
 [![](http://img.youtube.com/vi/HkR474Y3tVg/0.jpg)](https://www.youtube.com/watch?v=HkR474Y3tVg)
 
-Be sure to subscribe to our YouTube channel for more videos from our group!  (We record all our meetups).   Thanks for reading!
+Be sure to subscribe to our [YouTube channel](https://youtube.com/javascriptla) for more videos from our group!  (We record all our meetups).   Thanks for reading!
